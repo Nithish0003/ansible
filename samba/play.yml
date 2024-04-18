@@ -1,0 +1,71 @@
+---
+- name: installing and configuring samba
+  hosts: all
+  become: true
+  tasks:
+    - name: adding samba user
+      user:
+        name: sambauser
+        state: present
+    - name: create partition
+      parted:
+        device: /dev/vdb
+        number: 1
+        state: present
+    - name: format partition
+      filesystem:
+        fstype: ext4
+        dev: /dev/vdb1
+    - name: create mount point
+      file:
+        path: /mountpoint
+        state: directory
+        mode: 0777
+        owner: sambauser
+    - name: mounting
+      mount:
+        path: /mountpoint
+        src: /dev/vdb1
+        fstype: ext4
+        state: mounted
+    - name: install samba
+      dnf:
+        name: samba
+        state: present
+    - name: configure samba
+      blockinfile:
+        path: /etc/samba/smb.conf
+        insertafter: '^#\[global\]$'
+        block: |
+          [mountpoint]
+          path = /mountpoint
+          read only = no
+          writable = yes
+          browsable = yes
+          guest ok = yes
+    - name: set samba user password
+      command: "smbpasswd -a -s sambauser"
+      args:
+        stdin: "student\nstudent\n"
+    - name: restart samba
+      service:
+        name: smb
+        state: restarted
+    - name: configure firewall
+      firewalld:
+        service: samba
+        permanent: true
+        state: enabled
+    - name: disable enforcing
+      selinux:
+        policy: targeted
+        state: permissive
+    - name: reload firewall
+      service:
+        name: firewalld
+        state: restarted
+    - name: reload samba
+      service:
+        name: smb
+        state: restarted
+
