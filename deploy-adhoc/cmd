@@ -1,0 +1,18 @@
+ 66  lab deploy-adhoc start
+   67  ls
+   68  cd deploy-adhoc/
+   69  ls
+   70  sudo -l -U devops
+   71  ssh devops@servera.lab.example.com
+   72  cat ansible.cfg 
+   73  cat inventory 
+   74  ansible all -m ping
+   75  ansible all -m command -a id
+   76  ansible intranetweb -m command -a id
+   77  ansible intranetweb -m command -a id -u devops
+   78  ansible localhost -m copy -a 'content="Managed by Ansible\n" dest=/etc/motd' -u devops
+   79  ansible localhost -m copy -a 'content="Managed by Ansible\n" dest=/etc/motd' -u devops --become
+   80  ansible all -m copy -a 'content="Managed by Ansible\n" dest=/etc/motd' -u devops --become
+   81  ansible all -m command -a 'cat /etc/motd' -u devops
+   82  lab deploy-adhoc finish
+
