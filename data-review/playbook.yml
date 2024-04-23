@@ -1,0 +1,92 @@
+---
+- name: data-review
+  hosts: webserver
+  vars:
+    firewall_pkg: firewalld
+    firewall_svc: firewalld
+    web_pkg: httpd
+    web_svc: httpd
+    ssl_pkg:  mod_ssl
+    httpdconf_src: files/httpd.conf
+    httpdconf_dest: /etc/httpd/conf/httpd.conf
+    htaccess_src: files/.htaccess
+    secrets_dir: /etc/httpd/secrets
+    secrets_src: files/htpasswd
+    secrets_dest: "{{ secrets_dir }}/htpasswd"
+    web_root: /var/www/html
+  tasks: 
+    - name: latest version of the necessary packages are installed
+      dnf:
+        name: 
+          - "{{ firewall_pkg }}"
+          - "{{ web_pkg }}"
+          - "{{ ssl_pkg }}"
+        state: latest
+    - name: variable has been copied
+      copy:
+        src: "{{ httpdconf_src }}"
+        dest: "{{ httpdconf_dest }}"
+        owner: root
+        group: root
+        mode: 0644
+    - name: create the directory
+      file:
+        path: "{{ secrets_dir }}"
+        state: directory
+        owner: apache
+        group: apache
+        mode: 0500
+    - name: basic authentication of web users
+      copy:
+        src: "{{ secrets_src }}"
+        dest: "{{ secrets_dest }}"
+        owner: apache
+        group: apache
+        mode: 0400
+    - name: create a .htaccess file in the document root directory of the web server
+      copy: 
+        src: "{{ htaccess_src }}"
+        dest: "{{ web_root }}/.htaccess"
+        owner: apache
+        group: apache
+        mode: 0400
+    - name: create the web content file index.html
+      copy:
+        content: "{{ ansible_facts['fqdn'] }} ({{ ansible_facts['default_ipv4']['address'] }}) has been customized by Ansible.\n"
+        dest: "{{ web_root }}/index.html"
+    - name: enable and start the firewall
+      service: 
+        name: firewalld
+        enabled: yes
+        state: started
+    - name: firewalld module to allow the https service
+      firewalld:
+        service: https
+        permanent: yes
+        state: enabled
+        immediate: yes
+    - name: enable and start the web service
+      service:
+        name: "{{ web_svc }}"
+        enabled: yes
+        state: started
+- name: test authentication to the web server
+  hosts: localhost
+  become: false
+  vars:
+    web_user: guest
+  vars_files:
+    - vars/secret.yml
+  tasks:
+    - name: basic authentication
+      uri: 
+        url: https://serverb.lab.example.com
+        force_basic_auth: yes
+        validate_certs: no
+        user: "{{ web_user }}"
+        password: "{{ web_pass }}"
+        return_content: yes
+        status_code: 200
+      register: auth_test
+    - debug:
+        var: auth_test.content
