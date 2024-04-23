@@ -1,0 +1,11 @@
+---
+- name: to fetch and retrieve module
+  hosts: all
+  remote_user: root
+  tasks:
+    - name: Fetch the /var/log/secure log file from managed hosts
+      fetch: 
+        src: /var/log/secure
+        dest: ~/file-manage/secure-backups
+        flat: no
+        

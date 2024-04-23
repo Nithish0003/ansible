@@ -1,0 +1,47 @@
+Apr 22 05:41:45 servera polkitd[848]: Loading rules from directory /etc/polkit-1/rules.d
+Apr 22 05:41:45 servera polkitd[848]: Loading rules from directory /usr/share/polkit-1/rules.d
+Apr 22 05:41:45 servera polkitd[848]: Finished loading, compiling and executing 4 rules
+Apr 22 05:41:45 servera polkitd[848]: Acquired the name org.freedesktop.PolicyKit1 on the system bus
+Apr 22 05:41:47 servera sshd[911]: Server listening on 0.0.0.0 port 22.
+Apr 22 05:41:47 servera sshd[911]: Server listening on :: port 22.
+Apr 22 07:41:26 servera polkitd[869]: Loading rules from directory /etc/polkit-1/rules.d
+Apr 22 07:41:26 servera polkitd[869]: Loading rules from directory /usr/share/polkit-1/rules.d
+Apr 22 07:41:26 servera polkitd[869]: Finished loading, compiling and executing 4 rules
+Apr 22 07:41:26 servera polkitd[869]: Acquired the name org.freedesktop.PolicyKit1 on the system bus
+Apr 22 07:41:28 servera sshd[917]: Server listening on 0.0.0.0 port 22.
+Apr 22 07:41:28 servera sshd[917]: Server listening on :: port 22.
+Apr 23 00:25:52 servera polkitd[863]: Loading rules from directory /etc/polkit-1/rules.d
+Apr 23 00:25:52 servera polkitd[863]: Loading rules from directory /usr/share/polkit-1/rules.d
+Apr 23 00:25:52 servera polkitd[863]: Finished loading, compiling and executing 4 rules
+Apr 23 00:25:52 servera polkitd[863]: Acquired the name org.freedesktop.PolicyKit1 on the system bus
+Apr 23 00:25:54 servera sshd[919]: Server listening on 0.0.0.0 port 22.
+Apr 23 00:25:54 servera sshd[919]: Server listening on :: port 22.
+Apr 23 02:41:59 servera polkitd[853]: Loading rules from directory /etc/polkit-1/rules.d
+Apr 23 02:41:59 servera polkitd[853]: Loading rules from directory /usr/share/polkit-1/rules.d
+Apr 23 02:41:59 servera polkitd[853]: Finished loading, compiling and executing 4 rules
+Apr 23 02:41:59 servera polkitd[853]: Acquired the name org.freedesktop.PolicyKit1 on the system bus
+Apr 23 02:42:01 servera sshd[912]: Server listening on 0.0.0.0 port 22.
+Apr 23 02:42:01 servera sshd[912]: Server listening on :: port 22.
+Apr 23 05:16:02 servera polkitd[848]: Loading rules from directory /etc/polkit-1/rules.d
+Apr 23 05:16:02 servera polkitd[848]: Loading rules from directory /usr/share/polkit-1/rules.d
+Apr 23 05:16:02 servera polkitd[848]: Finished loading, compiling and executing 4 rules
+Apr 23 05:16:02 servera polkitd[848]: Acquired the name org.freedesktop.PolicyKit1 on the system bus
+Apr 23 05:16:04 servera sshd[908]: Server listening on 0.0.0.0 port 22.
+Apr 23 05:16:04 servera sshd[908]: Server listening on :: port 22.
+Apr 23 05:42:58 servera polkitd[850]: Loading rules from directory /etc/polkit-1/rules.d
+Apr 23 05:42:58 servera polkitd[850]: Loading rules from directory /usr/share/polkit-1/rules.d
+Apr 23 05:42:58 servera polkitd[850]: Finished loading, compiling and executing 4 rules
+Apr 23 05:42:58 servera polkitd[850]: Acquired the name org.freedesktop.PolicyKit1 on the system bus
+Apr 23 05:43:00 servera sshd[907]: Server listening on 0.0.0.0 port 22.
+Apr 23 05:43:00 servera sshd[907]: Server listening on :: port 22.
+Apr 23 06:55:36 servera polkitd[855]: Loading rules from directory /etc/polkit-1/rules.d
+Apr 23 06:55:36 servera polkitd[855]: Loading rules from directory /usr/share/polkit-1/rules.d
+Apr 23 06:55:36 servera polkitd[855]: Finished loading, compiling and executing 4 rules
+Apr 23 06:55:36 servera polkitd[855]: Acquired the name org.freedesktop.PolicyKit1 on the system bus
+Apr 23 06:55:38 servera sshd[908]: Server listening on 0.0.0.0 port 22.
+Apr 23 06:55:38 servera sshd[908]: Server listening on :: port 22.
+Apr 23 07:07:05 servera sshd[1219]: error: kex_exchange_identification: client sent invalid protocol identifier "brain"
+Apr 23 07:07:05 servera sshd[1219]: error: send_error: write: Broken pipe
+Apr 23 07:12:40 servera sshd[1223]: Accepted publickey for root from 172.25.250.9 port 59868 ssh2: RSA SHA256:M8ikhcEDm2tQ95Z0o7ZvufqEixCFCt+wowZLNzNlBT0
+Apr 23 07:12:40 servera systemd[1227]: pam_unix(systemd-user:session): session opened for user root by (uid=0)
+Apr 23 07:12:40 servera sshd[1223]: pam_unix(sshd:session): session opened for user root by (uid=0)
