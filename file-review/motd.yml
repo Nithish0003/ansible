@@ -1,0 +1,36 @@
+---
+- name: using templates
+  hosts: all
+  remote_user: devops
+  become: true
+  tasks:
+    - name: verify /etc/motd exist
+      stat:
+        path: /etc/motd
+      register: response
+    - name: verify response
+      debug:
+        var: response
+    - name: configure /etc/motd
+      template:
+        src: motd.j2
+        dest: /etc/motd
+        owner: root
+        group: root
+        mode: 0644
+    - name: copy files
+      copy:
+        src: files/issue
+        dest: /etc/
+        owner: root
+        group: root
+        mode: 0644
+    - name: /etc/issue.net is a symbolic link to /etc/issue
+      file:
+        src: /etc/issue
+        dest: /etc/issue.net
+        state: link
+        owner: root
+        group: root
+        mode: 0644
+        force: yes
