@@ -1,0 +1,6 @@
+- name: config phpMyAdmin
+  hosts: all
+  become: true
+  vars:
+  roles: 
+      - role: /home/student/ansible/ansible/roles/lvm

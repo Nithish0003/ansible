@@ -1,0 +1,25 @@
+---
+# tasks file for lvm/
+
+- name: create partition 
+  parted:
+    device: "{{ device_name }}"
+    number: "{{ num_part }}"
+    part_start: "{{ item-1 }}GiB"
+    part_end: "{{ item }}GiB" 
+    state: present
+    label: gpt
+    resize: true
+  loop: 
+    - 2
+    - 3
+    - 4
+  when: partion == true
+- name: setting filesystem
+  filesystem:
+    fstype: "{{ fs_type }}"
+    dev: "{{ item }}"
+  loop: "{{ fs_dev }}"
+# - name: create physical volume
+#   pvcreate:
+#     vgname: 
