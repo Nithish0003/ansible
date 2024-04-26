@@ -6,4 +6,4 @@
     config_phpmyadmin: true
     php_access: all granted
   roles: 
-      - role: ../roles/phpMyAdmin
+      - role: /home/student/ansible/ansible/roles/phpMyAdmin
