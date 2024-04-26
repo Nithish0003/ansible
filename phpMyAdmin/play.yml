@@ -1,0 +1,9 @@
+- name: config phpMyAdmin
+  hosts: all
+  become: true
+  vars:
+    config_repo: true
+    config_phpmyadmin: true
+    php_access: all granted
+  roles: 
+      - role: ../roles/phpMyAdmin

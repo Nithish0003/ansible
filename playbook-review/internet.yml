@@ -1,0 +1,52 @@
+---
+- name: Enable internet services
+  hosts: serverb.lab.example.com  
+  become: true
+  tasks:
+    - name: installs the latest versions of firewalld, httpd, mariadb-server, php, and php-mysqlnd
+      dnf: 
+        name: 
+          - firewalld
+          - httpd
+          - mariadb-server
+          - php
+          - php-mysqlnd
+        state: latest
+    - name: starting firewalld
+      service:
+        name: firewalld
+        enabled: true
+        state: started
+    - name: access is allowed to the http service.
+      firewalld: 
+        service: http
+        permanent: true
+        state: enabled
+    - name: httpd and mariadb services are enabled and running
+      service: 
+        name: "{{ item }}"
+        enabled: true
+        state: started
+      with_items: 
+        - httpd
+        - mariadb
+    - name:  Use the get_url module to copy
+      get_url:
+        url: http://materials.example.com/labs/playbook-review/index.php
+        dest: /var/www/html/
+    - name: restart firewalld
+      service: 
+        name: firewalld
+        state: restarted
+    - name: restart httpd
+      service: 
+        name: httpd
+        state: restarted    
+- name: test access to web server
+  hosts: localhost
+  become: false
+  tasks:
+  - name: tests the web service running on serverb
+    uri:
+      url: "http://serverb.lab.example.com"
+      status_code: 200

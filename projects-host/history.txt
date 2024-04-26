@@ -1,0 +1,20 @@
+lab projects-host start
+  260  cd projects-host/
+  261  ls
+  262  ansible-playbook -i inventory2 playbook.yml 
+  263   ansible all -i inventory1 --list-hosts
+  264   ansible 172.25.250.44 -i inventory1 --list-hosts
+  265   ansible 172.25.252.44 -i inventory1 --list-hosts
+  266   ansible db1.example.com -i inventory1 --list-hosts
+  267   ansible *.example.com -i inventory1 --list-hosts
+  268   ansible *.example.com *.example.com -i inventory1 --list-hosts.lab.example.com -i inventory1 --list-hosts
+  269   ansible '*.example.com !*.lab.example.com' -i inventory1 --list-hosts
+  270   ansible \ -i inventory1 --list-hosts
+  271   ansible lb1.example.com,s1.lab.example.com,db1.example.com -i inventory1 --list-hosts
+  272   ansible lb1.lab.example.com,s1.lab.example.com,db1.example.com -i inventory1 --list-hosts
+  273   ansible 172.25.* -i inventory1 --list-hosts
+  274   ansible s* -i inventory1 --list-hosts
+  275   ansible 'prod,172*,*lab*' -i inventory1 --list-hosts
+  276   ansible 'db,&london' -i inventory1 --list-hosts
+  277  lab projects-host finish
+
