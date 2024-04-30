@@ -2,5 +2,6 @@
   hosts: all
   become: true
   vars:
+    logicalVg: true
   roles: 
       - role: /home/student/ansible/ansible/roles/lvm

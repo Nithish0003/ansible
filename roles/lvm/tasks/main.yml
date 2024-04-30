@@ -10,6 +10,7 @@
     state: present
     label: gpt
     resize: true
+  when: item <= "{{ num_part }}"
   loop: 
     - 2
     - 3
@@ -20,6 +21,18 @@
     fstype: "{{ fs_type }}"
     dev: "{{ item }}"
   loop: "{{ fs_dev }}"
-# - name: create physical volume
-#   pvcreate:
-#     vgname: 
+  when: file_system == true
+- name: create physical volume
+  lvg:
+    vg: logical_vg
+    pvs: "{{ fs_dev }}"
+    state: present
+  when: physical_volume == true
+- name: create logical volume
+  lvol:
+    vg: logical_vg
+    lv: logical_volume
+    pvs: "{{ fs_dev }}"
+    size: "{{ num_part }}G"
+    state: present
+  when: logicalVg == true

@@ -2,11 +2,14 @@
 # defaults file for lvm/
 
 device_name: /dev/vdb
-num_part: 4
+num_part: 3
 fs_type: ext4
 fs_dev: 
   - /dev/vdb1
   - /dev/vdb2
   - /dev/vdb3
 partion: false
-vg: volume group
+# vg: volume group
+file_system: false
+physical_volume: false
+logicalVg: false
