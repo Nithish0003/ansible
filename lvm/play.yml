@@ -2,6 +2,8 @@
   hosts: all
   become: true
   vars:
+    physical_volume: true
+    volume_group: true
     logicalVg: true
   roles: 
       - role: /home/student/ansible/ansible/roles/lvm

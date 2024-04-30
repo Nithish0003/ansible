@@ -4,12 +4,14 @@
 device_name: /dev/vdb
 num_part: 3
 fs_type: ext4
-fs_dev: 
+dev: 
   - /dev/vdb1
   - /dev/vdb2
   - /dev/vdb3
 partion: false
-# vg: volume group
+vg_name: volume_group
 file_system: false
 physical_volume: false
 logicalVg: false
+volume_group: false
+vg_size: 2

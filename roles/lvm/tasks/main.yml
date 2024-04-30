@@ -20,19 +20,24 @@
   filesystem:
     fstype: "{{ fs_type }}"
     dev: "{{ item }}"
-  loop: "{{ fs_dev }}"
+  loop: "{{ dev }}"
   when: file_system == true
 - name: create physical volume
   lvg:
-    vg: logical_vg
-    pvs: "{{ fs_dev }}"
+    vg: "{{ vg_name }}"
+    pvs: "{{ dev }}"
     state: present
   when: physical_volume == true
+- name: create volume group
+  lvg:
+    vg: "{{ vg_name }}"
+    pvs: "{{ dev }}"
+    state: present
+  when: volume_group == true
 - name: create logical volume
   lvol:
-    vg: logical_vg
+    vg: "{{ vg_name }}"
     lv: logical_volume
-    pvs: "{{ fs_dev }}"
-    size: "{{ num_part }}G"
+    size: "{{ vg_size }}G"
     state: present
   when: logicalVg == true
