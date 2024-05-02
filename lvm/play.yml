@@ -1,4 +1,4 @@
-- name: config phpMyAdmin
+- name: config lvm
   hosts: all
   become: true
   vars:
