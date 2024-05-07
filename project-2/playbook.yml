@@ -1,0 +1,45 @@
+---
+- name: installing apache
+  hosts: all
+  become: true
+  tasks:
+    - name: installing httpd
+      dnf:
+        name: httpd
+        state: latest
+    - name: configure firewalld
+      firewalld:
+        port: 80/tcp
+        permanent: true
+        state: enabled
+    - name: restart firewall
+      service:
+        name: firewalld
+        state: restarted
+    - name: restart apache
+      service:
+        name: httpd
+        enabled: yes
+        state: started
+# - name: testing
+#   hosts: all
+#   tasks:
+#     - name: testing apache
+#       uri:
+#         url: http://172.25.250.10:80
+#         status_code: 200
+- name: installing mariadb
+  hosts: all
+  become: true
+  tasks:
+    - name: installing mariadb
+      dnf:
+        name:
+          - mariadb
+          - mariadb-server
+        state: latest
+    - name: enable mariadb
+      service:
+        name: mariadb
+        enabled: yes
+        state: started
