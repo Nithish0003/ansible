@@ -1,0 +1,7 @@
+---
+# handlers file for phpMyAdmin
+
+- name: restart firewall
+  service:
+    name: firewalld
+    state: restarted

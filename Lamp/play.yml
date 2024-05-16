@@ -1,0 +1,9 @@
+- name: config LAMP
+  hosts: all
+  become: true
+  vars:
+    config_repo: true
+    config_phpmyadmin: true
+    php_access: all granted
+  roles:
+    - role: /home/nithish/ansible/ansible/roles/LAMP
