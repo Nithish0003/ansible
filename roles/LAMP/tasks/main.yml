@@ -1,16 +1,18 @@
 ---
 # tasks file for phpMyAdmin
-- name: config epel
-  command: subscription-manager repos --enable codeready-builder-for-rhel-9-$(arch)-rpms
-  when: config_repo == true
+# - name: config epel
+#   command: subscription-manager repos --enable codeready-builder-for-rhel-9-$(arch)-rpms
+#   when: config_repo == true
 - name: install epel  
   command: 
     cmd: dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm -y
-  when: config_repo == true
+    warn: false
+  when: config_repo == true and ansible_distribution == 'RedHat' 
 - name: Installing required package
   dnf:
     name: "{{ package }}"
     state: latest
+  when: ansible_distribution == 'RedHat' 
 - name: firewall config
   firewalld:
     port: 80/tcp
@@ -24,7 +26,7 @@
     owner: root
     group: root
     mode: '0644'
-  when: config_phpmyadmin == true
+  when: config_phpmyadmin == true and ansible_distribution == 'RedHat' 
 - name: restart service
   service:
     name: "{{ item }}"
