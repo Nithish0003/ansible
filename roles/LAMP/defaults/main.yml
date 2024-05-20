@@ -4,10 +4,19 @@ package:
   - httpd
   - mysql-server
   - phpmyadmin
-
+win_package:
+  - apache
+  - mysql
+  - phpmyadmin
 service:
   - httpd
   - mysqld
 php_access: local
 config_repo: false
 config_phpmyadmin: false
+# phpmyadmin_version: "5.2.1"
+# phpmyadmin_database_host: localhost
+# phpmyadmin_database_user: admin
+# phpmyadmin_database_pass: "P@s5-W0rd"
+# phpmyadmin_database_compress: false
+# phpmyadmin_database_allownopassword: false

@@ -3,12 +3,16 @@
 # - name: config epel
 #   command: 
 #     cmd: subscription-manager repos --enable codeready-builder-for-rhel-9-$(arch)-rpms
-#   when: config_repo == true and ansible_distribution == 'CentOS'
+#   when: 
+      # - config_repo == true 
+      # - ansible_distribution == 'CentOS'
 - name: install epel  
   command: 
     cmd: dnf install epel-release -y
     warn: false
-  when: config_repo == true and ansible_distribution == 'CentOS'
+  when: 
+    - config_repo == true 
+    - ansible_distribution == 'CentOS'
 - name: Installing required package
   dnf:
     name: "{{ package }}"
@@ -28,10 +32,52 @@
     owner: root
     group: root
     mode: '0644'
-  when: config_phpmyadmin == true and ansible_distribution == 'CentOS'
+  when: 
+    - config_phpmyadmin == true 
+    - ansible_distribution == 'CentOS'
 - name: restart service
   service:
     name: "{{ item }}"
     state: restarted
     enabled: yes
   loop: "{{ service }}"
+  when: ansible_distribution == 'CentOS'
+
+# - name: install package
+#   win_chocolatey:
+#     name: "{{ win_package }}"
+#     state: latest
+#   when: ansible_distribution == 'Windows'
+
+# - name: Configure Windows Firewall
+#   win_firewall:
+#     state: enabled
+#     profiles:
+#       - Domain
+#       - Private
+#       - Public
+#     inbound_action: allow
+#     outbound_action: allow
+#   when: ansible_distribution == 'Windows'
+
+# - name: Allow HTTP traffic
+#   win_firewall_rule:
+#     name: Allow HTTP
+#     direction: in
+#     protocol: tcp
+#     local_port: 80
+#     action: allow
+#   when: ansible_distribution == 'Windows'
+
+# - name: Configure phpMyAdmin
+#   win_template:
+#     src: templates/config.inc.php.j2
+#     dest: C:\phpmyadmin\config.inc.php
+#   when: ansible_distribution == 'Windows'
+
+# - name: Start Apache service
+#   win_service:
+#     name: Apache2.4
+#     state: started
+#     enabled: yes
+#   when: ansible_distribution == 'Windows'
