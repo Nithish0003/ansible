@@ -4,16 +4,16 @@ package:
   - httpd
   - mysql-server
   - phpmyadmin
-win_package:
-  - apache
-  - mysql
-  - phpmyadmin
 service:
   - httpd
   - mysqld
 php_access: local
 config_repo: false
 config_phpmyadmin: false
+# win_package:
+#   - apache
+#   - mysql
+#   - phpmyadmin
 # phpmyadmin_version: "5.2.1"
 # phpmyadmin_database_host: localhost
 # phpmyadmin_database_user: admin
